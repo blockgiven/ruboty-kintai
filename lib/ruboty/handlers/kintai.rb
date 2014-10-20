@@ -47,8 +47,10 @@ module Ruboty
       end
 
       def list(message)
-        start_at = Tokiyomi.parse(message[:start].tr('０-９', '0-9').gsub(/ヶ月|ケ月|か月|ヵ月|カ月/, '月'))
-        end_at   = Tokiyomi.parse(message[:end].tr('０-９', '0-9').gsub(/ヶ月|ケ月|か月|ヵ月|カ月/, '月'))
+        start_at = message[:start].tr('０-９', '0-9').gsub(/ヶ月|ケ月|か月|ヵ月|カ月/, '月')
+        start_at = (Tokiyomi.parse(start_at) rescue Time.parse(start_at))
+        end_at   = message[:end].tr('０-９', '0-9').gsub(/ヶ月|ケ月|か月|ヵ月|カ月/, '月')
+        end_at   = (Tokiyomi.parse(end_at) rescue Time.parse(end_at))
 
         reporter = reporter_for(message)
         message.reply(reporter.new(kintai_range(start_at, end_at)).report)
