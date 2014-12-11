@@ -4,6 +4,7 @@ require "ruboty/handlers/kintai"
 require "active_support"
 require "active_support/core_ext"
 require "tokiyomi"
+require "csv"
 
 module Ruboty
   module Kintai
